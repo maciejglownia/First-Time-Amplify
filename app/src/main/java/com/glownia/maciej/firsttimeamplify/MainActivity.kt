@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.glownia.maciej.firsttimeamplify.databinding.ActivityMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,5 +37,22 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
+    }
+
+    private fun setupAuthButton(userData: UserData) {
+
+        // register a click listener
+        binding.fabAuth.setOnClickListener { view ->
+
+            val authButton = view as FloatingActionButton
+
+            if (userData.isSignedIn.value!!) {
+                authButton.setImageResource(R.drawable.ic_baseline_lock_open)
+                Backend.signOut()
+            } else {
+                authButton.setImageResource(R.drawable.ic_baseline_lock_open)
+                Backend.signIn(this)
+            }
+        }
     }
 }
