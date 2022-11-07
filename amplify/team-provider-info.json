@@ -10,6 +10,11 @@
       "StackName": "amplify-firsttimeamplify-dev-125118",
       "StackId": "arn:aws:cloudformation:eu-central-1:139642061921:stack/amplify-firsttimeamplify-dev-125118/7cd2f670-5e92-11ed-afdf-06e5b4bcb68a",
       "AmplifyAppId": "d2oaj9y50pcrap"
+    },
+    "categories": {
+      "auth": {
+        "firsttimeamplify4f178bda": {}
+      }
     }
   }
 }
