@@ -2,6 +2,7 @@ package com.glownia.maciej.firsttimeamplify
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.auth.AuthChannelEventName
@@ -113,5 +114,13 @@ object Backend {
             { result: AuthSignInResult -> Log.i(TAG, result.toString()) },
             { error: AuthException -> Log.e(TAG, error.toString()) }
         )
+    }
+
+    // pass the data from web redirect to Amplify libs
+    fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d(TAG, "received requestCode : $requestCode and resultCode : $resultCode")
+        if (requestCode == AWSCognitoAuthPlugin.WEB_UI_SIGN_IN_ACTIVITY_CODE) {
+            Amplify.Auth.handleWebUISignInResponse(data)
+        }
     }
 }
