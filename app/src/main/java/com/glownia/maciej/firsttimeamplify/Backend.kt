@@ -30,6 +30,10 @@ object Backend {
         return this
     }
 
+    /**
+     * Call when an authentication event is received.
+     * Keeps the UserData object in sync.
+     */
     private fun updateUserData(withSignedInStatus : Boolean) {
         UserData.setSignedIn(withSignedInStatus)
     }

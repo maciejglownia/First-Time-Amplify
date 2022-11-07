@@ -29,7 +29,11 @@ object UserData {
     // observable properties
     //
 
-    // signed in status
+    /**
+     * Signed in status
+     * Observers that are subscribed to this property will be notified when the value changes.
+     * We use this mechanism to refresh the user interface automatically.
+     */
     private val _isSignedIn = MutableLiveData<Boolean>(false)
     var isSignedIn: LiveData<Boolean> = _isSignedIn
 
