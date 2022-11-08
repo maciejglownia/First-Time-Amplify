@@ -21,6 +21,23 @@ class MainActivity : AppCompatActivity() {
 
         // prepare our List view and RecyclerView (cells)
         setupRecyclerView(binding.included.itemList)
+
+        setupAuthButton(UserData)
+
+        /**
+         * Register an observer on Userdata.isSignedIn value. The closure is called when isSignedIn value changes.
+         * Right now, we just change the lock icon : open when the user is authenticated and closed when the user has no session.
+         */
+        UserData.isSignedIn.observe(this, Observer<Boolean> { isSignedUp ->
+            // update UI
+            Log.i(TAG, "isSignedIn changed : $isSignedUp")
+
+            if (isSignedUp) {
+                binding.fabAuth.setImageResource(R.drawable.ic_baseline_lock_open)
+            } else {
+                binding.fabAuth.setImageResource(R.drawable.ic_baseline_lock)
+            }
+        })
     }
 
     // recycler view is the list of cells
