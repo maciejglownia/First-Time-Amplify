@@ -44,6 +44,15 @@
                 <data android:scheme="gettingstarted" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddNoteActivity"
+            android:exported="true"
+            android:label="Add Note"
+            android:theme="@style/Theme.FirstTimeAmplify.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.glownia.maciej.firsttimeamplify.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

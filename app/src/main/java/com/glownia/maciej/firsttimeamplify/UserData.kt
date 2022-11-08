@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.amplifyframework.datastore.generated.model.NoteData
 
 /**
  * The UserData class is responsible to hold user data, namely a isSignedIn flag to track current
@@ -89,5 +90,22 @@ object UserData {
         // bitmap image
         var image: Bitmap? = null
 
+        // return an API NoteData from this Note object
+        val data : NoteData
+            get() = NoteData.builder()
+                .name(this.name)
+                .description(this.description)
+                .image(this.imageName)
+                .id(this.id)
+                .build()
+
+        // static function to create a Note from a NoteData API object
+        companion object {
+            fun from(noteData : NoteData) : Note {
+                val result = Note(noteData.id, noteData.name, noteData.description, noteData.image)
+                // some additional code will come here later
+                return result
+            }
+        }
     }
 }

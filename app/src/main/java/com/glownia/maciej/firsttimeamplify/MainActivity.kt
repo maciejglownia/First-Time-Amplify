@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.glownia.maciej.firsttimeamplify.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -34,8 +35,14 @@ class MainActivity : AppCompatActivity() {
 
             if (isSignedUp) {
                 binding.fabAuth.setImageResource(R.drawable.ic_baseline_lock_open)
+                Log.d(TAG, "Showing fabADD")
+                binding.fabAdd.show()
+                binding.fabAdd.animate().translationY(0.0F - 1.1F * binding.fabAuth.customSize)
             } else {
                 binding.fabAuth.setImageResource(R.drawable.ic_baseline_lock)
+                Log.d(TAG, "Hiding fabADD")
+                binding.fabAdd.hide()
+                binding.fabAdd.animate().translationY(0.0F)
             }
         })
     }
@@ -50,6 +57,15 @@ class MainActivity : AppCompatActivity() {
             // let's create a RecyclerViewAdapter that manages the individual cells
             recyclerView.adapter = NoteRecyclerViewAdapter(notes)
         })
+
+        // register a click listener
+        binding.fabAdd.setOnClickListener {
+            startActivity(Intent(this, AddNoteActivity::class.java))
+        }
+
+        // add a touch gesture handler to manager the swipe to delete gesture
+        val itemTouchHelper = ItemTouchHelper(SwipeCallback(this))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     companion object {
