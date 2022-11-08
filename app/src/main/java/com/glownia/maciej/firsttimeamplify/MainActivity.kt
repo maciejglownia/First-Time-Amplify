@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.glownia.maciej.firsttimeamplify.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -61,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(this, AddNoteActivity::class.java))
         }
+
+        // add a touch gesture handler to manager the swipe to delete gesture
+        val itemTouchHelper = ItemTouchHelper(SwipeCallback(this))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     companion object {
