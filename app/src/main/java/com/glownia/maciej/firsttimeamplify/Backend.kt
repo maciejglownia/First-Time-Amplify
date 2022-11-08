@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.api.graphql.model.ModelMutation
@@ -95,11 +96,21 @@ object Backend {
     }
 
     /**
-     * Call when an authentication event is received.
-     * Keeps the UserData object in sync.
+     * Calls the API to query the list of Note for the currently signed in user when the application starts.
      */
+    // change our internal state and query list of notes
     private fun updateUserData(withSignedInStatus: Boolean) {
         UserData.setSignedIn(withSignedInStatus)
+
+        val notes = UserData.notes().value
+        val isEmpty = notes?.isEmpty() ?: false
+
+        // query notes when signed in and we do not have Notes yet
+        if (withSignedInStatus && isEmpty ) {
+            this.queryNotes()
+        } else {
+            UserData.resetNotes()
+        }
     }
 
     fun signOut() {
