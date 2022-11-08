@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.amplifyframework.AmplifyException
+import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.auth.AuthChannelEventName
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
@@ -29,6 +30,7 @@ object Backend {
     fun initialize(applicationContext: Context): Backend {
         try {
             Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSApiPlugin())
             Amplify.configure(applicationContext)
             Log.i(TAG, "Initialized Amplify")
         } catch (e: AmplifyException) {
