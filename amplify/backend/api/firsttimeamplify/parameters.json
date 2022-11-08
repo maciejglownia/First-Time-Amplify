@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "firsttimeamplify",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authfirsttimeamplify4f178bda",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
