@@ -151,10 +151,12 @@ object Backend {
             ModelQuery.list(NoteData::class.java),
             { response ->
                 Log.i(TAG, "Queried")
-                for (noteData in response.data) {
-                    Log.i(TAG, noteData.name)
-                    // TODO should add all the notes at once instead of one by one (each add triggers a UI refresh)
-                    UserData.addNote(UserData.Note.from(noteData))
+                if (response.data != null) {
+                    for (noteData in response.data) {
+                        Log.i(TAG, noteData.name)
+                        // Should add all the notes at once instead of one by one (each add triggers a UI refresh)
+                        UserData.addNote(UserData.Note.from(noteData))
+                    }
                 }
             },
             { error -> Log.e(TAG, "Query failure", error) }
