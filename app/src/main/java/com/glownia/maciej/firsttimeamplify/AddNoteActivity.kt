@@ -48,6 +48,12 @@ class AddNoteActivity : AppCompatActivity() {
             )
             startActivityForResult(i, SELECT_PHOTO)
         }
+
+        // create rounded corners for the image
+        binding.image.shapeAppearanceModel = binding.image.shapeAppearanceModel
+            .toBuilder()
+            .setAllCorners(CornerFamily.ROUNDED, 150.0f)
+            .build()
     }
 
     companion object {
