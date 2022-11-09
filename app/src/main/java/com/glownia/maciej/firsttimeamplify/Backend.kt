@@ -20,6 +20,7 @@ import com.amplifyframework.core.InitializationStatus
 import com.amplifyframework.datastore.generated.model.NoteData
 import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 
 /**
  * I use a singleton design pattern to make it easily available through the application
@@ -35,6 +36,7 @@ object Backend {
         try {
             Amplify.addPlugin(AWSCognitoAuthPlugin())
             Amplify.addPlugin(AWSApiPlugin())
+            Amplify.addPlugin(AWSS3StoragePlugin())
             Amplify.configure(applicationContext)
             Log.i(TAG, "Initialized Amplify")
         } catch (e: AmplifyException) {
