@@ -88,5 +88,16 @@ class SwipeCallback(private val activity: AppCompatActivity): ItemTouchHelper.Si
 
         // async remove from backend
         Backend.deleteNote(note)
+
+        /**
+         * We need to clean up after ourselves, i.e. to delete images from the cloud storage
+         * when a user deletes a Note.
+         * AWS bills as Amazon S3 charges per Gb/month of data stored (the first 5Gb are for free,
+         * but more we need to pay)
+        */
+        if (note?.imageName != null) {
+            //asynchronously delete the image (and assume it will work)
+            Backend.deleteImage(note.imageName!!)
+        }
     }
 }
