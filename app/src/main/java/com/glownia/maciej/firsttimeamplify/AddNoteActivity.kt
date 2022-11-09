@@ -41,6 +41,16 @@ class AddNoteActivity : AppCompatActivity() {
                 binding.description?.text.toString()
             )
 
+            // invoke the storage methods from Backend when a Note is created
+            if (this.noteImagePath != null) {
+                note.imageName = UUID.randomUUID().toString()
+                //note.setImage(this.noteImage)
+                note.image = this.noteImage
+
+                // asynchronously store the image (and assume it will work)
+                Backend.storeImage(this.noteImagePath!!, note.imageName!!)
+            }
+
             // store it in the backend
             Backend.createNote(note)
 
